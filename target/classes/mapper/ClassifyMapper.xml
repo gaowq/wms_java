@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wms_java.mapper.ClassifyMapper">
+
+    <resultMap type="com.example.wms_java.model.Classify" id="ClassifyResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="isdel" column="isdel"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectClassify">
+        select id,
+               `name`,
+               isdel,
+               create_time
+        from classify
+        where isdel = 0
+    </sql>
+
+    <select id="selectList" resultMap="ClassifyResult">
+        <include refid="selectClassify"/>
+    </select>
+
+
+    <insert id="insertClassify" parameterType="com.example.wms_java.model.Classify" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into classify
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="createTime != null">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="createTime != null">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateClassify" parameterType="com.example.wms_java.model.Classify">
+        update classify
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteClassifyById" parameterType="Long">
+        update classify
+        set isdel = 1
+        where id = #{id}
+    </update>
+
+</mapper>
