@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
+
+
+<div id="view1" style="width:100%;">
+    <div id="menuAccordion" style="width:250px;display:block;float:left;"></div>
+    <div id="tabs" class="easyui-tabs" style="width:auto;display:block;"></div>
+</div>
 
 <input type="button" id="btn0" value="添加分类"/>
 <br/>
 
 <label>名称</label>
-<input type="text" name="name" />
+<input type="text" name="name"/>
 <label>规格</label>
-<input type="text" name="spec" />
+<input type="text" name="spec"/>
 <input type="button" id="btn1" value="搜索"/>
 
 <input type="button" id="btn2" value="进货"/>
@@ -32,9 +39,9 @@
             $('#dg').datagrid({
                 title: '列表',
                 url: '/getTable3',
-                rownumbers : true,
-                pageList: [10,20,30],//选择一页显示多少数据
-                pagination : true,
+                rownumbers: true,
+                pageList: [10, 20, 30],//选择一页显示多少数据
+                pagination: true,
                 columns: [[
                     {field: 'name', title: '名称', width: 100},
                     {field: 'spec', title: '规格', width: 100},
@@ -44,5 +51,67 @@
                 ]]
             });
         });
+
+
+        //var basePath = $('#basePath').val();
+        //basePath +
+
+        // 初始化
+        //$('#menuAccordion').accordion();
+        $('#menuAccordion').accordion({
+            fillSpace: true,
+            autoheight: true,
+            //fit: true,
+            border: false,
+            animate: false
+        });
+
+
+        $.post('/getTable4', {type: 1}, function (data) {
+            if (data) {
+                $.each(data, function (index, item) {
+                    var selected = false;
+                    if (index == 0) {
+                        selected = true;
+                    }
+                    // Accordion 折叠面板
+                    $('#menuAccordion').accordion('add', {
+                        title: item.text,
+                        content: "<ul id='menu_tree_" + item.id + "'></ul>",
+                        selected: selected
+                    });
+                    // 树形菜单
+                    $('#menu_tree_' + item.id).tree({
+                        data: item.children,
+                        onClick: function (node) {
+                            if (node.children != null && node.children.length != 0) {
+                                return;
+                            }
+                            // 添加选项卡
+                            addTab('tabs', node.text, node.url);
+                        }
+                    });
+                });
+            }
+        }, 'json');
+
+
+        /**
+         * 添加标签页面板
+         * @param tabsId 标签页 ID
+         * @param title 标签页面板的标题文字
+         * @param url 加载远程内容来填充标签页面板的 URL
+         */
+        function addTab(tabsId, title, url) {
+            var $tabs = $('#' + tabsId);
+            if ($tabs.tabs('exists', title)) {
+                $tabs.tabs('close', title);
+            }
+            $tabs.tabs('add', {
+                title: title,
+                href: url,
+                closable: true
+            })
+        }
     });
 </script>
