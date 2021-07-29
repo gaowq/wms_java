@@ -10,21 +10,8 @@
 
 <div id="view1" style="width:100%;">
     <div id="menuAccordion" style="width:250px;display:block;float:left;"></div>
-    <div id="tabs" class="easyui-tabs" style="width:auto;display:block;"></div>
+    <div id="tabs" class="easyui-tabs" style="width:auto;height:auto;display:block;"></div>
 </div>
-
-<input type="button" id="btn0" value="添加分类"/>
-<br/>
-
-<label>名称</label>
-<input type="text" name="name"/>
-<label>规格</label>
-<input type="text" name="spec"/>
-<input type="button" id="btn1" value="搜索"/>
-
-<input type="button" id="btn2" value="进货"/>
-<input type="button" id="btn3" value="出货"/>
-<table id="dg"></table>
 
 </body>
 </html>
@@ -35,24 +22,6 @@
 
 <script type="text/javascript" th:inline="none">
     $(function () {
-        $("#btn1").click(function () {
-            $('#dg').datagrid({
-                title: '列表',
-                url: '/getTable3',
-                rownumbers: true,
-                pageList: [10, 20, 30],//选择一页显示多少数据
-                pagination: true,
-                columns: [[
-                    {field: 'name', title: '名称', width: 100},
-                    {field: 'spec', title: '规格', width: 100},
-                    {field: 'qty', title: '数量', width: 100},
-                    {field: 'location', title: '位置', width: 100},
-                    {field: 'min_qty', title: '最低库存数量', width: 100}
-                ]]
-            });
-        });
-
-
         //var basePath = $('#basePath').val();
         //basePath +
 
@@ -65,7 +34,6 @@
             border: false,
             animate: false
         });
-
 
         $.post('/getTable4', {type: 1}, function (data) {
             if (data) {
@@ -80,6 +48,7 @@
                         content: "<ul id='menu_tree_" + item.id + "'></ul>",
                         selected: selected
                     });
+
                     // 树形菜单
                     $('#menu_tree_' + item.id).tree({
                         data: item.children,
@@ -92,6 +61,8 @@
                         }
                     });
                 });
+
+                $('#menu_tree_1_easyui_tree_1').click();
             }
         }, 'json');
 

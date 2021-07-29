@@ -1,11 +1,10 @@
 package com.example.wms_java.controller;
 
-import com.example.wms_java.model.Classify;
 import com.example.wms_java.model.Inventory;
-import com.example.wms_java.model.Menu;
-import com.example.wms_java.service.IClassifyService;
+import com.example.wms_java.model.MyMenu;
 import com.example.wms_java.service.impl.ClassifyService;
 import com.example.wms_java.service.impl.InventoryService;
+import com.example.wms_java.service.impl.MyMenuService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -23,6 +21,9 @@ public class HomeController {
 
     @Autowired
     private InventoryService inventoryService;
+
+    @Autowired
+    private MyMenuService myMenuService;
 
 //    @ResponseBody
 //    @PostMapping("/getTable1")
@@ -35,12 +36,6 @@ public class HomeController {
     public String my(HttpServletRequest request) {
         request.setAttribute("key", "游客");
         return "/index";
-    }
-
-    @GetMapping("/aaa2")
-    public String my2(HttpServletRequest request) {
-        request.setAttribute("key", "游客");
-        return "/index2";
     }
 
     @ResponseBody
@@ -65,25 +60,26 @@ public class HomeController {
 
     @ResponseBody
     @PostMapping("/getTable4")
-    public Menu[] getTable4() {
+    public MyMenu[] getTable4() {
 
-        Menu menu1 = new Menu();
-        menu1.setText("aaa测试");
-        menu1.setUrl("/abc/a1");
+//        MyMenu myMenu1 = new MyMenu();
+//        myMenu1.setText("aaa测试");
+//        myMenu1.setUrl("/abc/a1");
+//
+//
+//        MyMenu myMenu2 = new MyMenu();
+//        myMenu2.setText("aaa测试2");
+//        myMenu2.setUrl("/abc/a2");
+//
+//        MyMenu myMenu3 = new MyMenu();
+//        myMenu3.setText("aaa测试2");
+//        myMenu3.setUrl("/inventory/index");
+//
+//        myMenu2.setChildren(new MyMenu[]{myMenu3});
+//
+//        MyMenu[] myMenus = new MyMenu[]{myMenu1, myMenu2};
 
-
-        Menu menu2 = new Menu();
-        menu2.setText("aaa测试2");
-        menu2.setUrl("/abc/a2");
-
-        Menu menu3 = new Menu();
-        menu3.setText("aaa测试2");
-        menu3.setUrl("/aaa2");
-
-        menu2.setChildren(new Menu[]{menu3});
-
-        Menu[] menus = new Menu[]{menu1, menu2};
-
-        return menus;
+        List<MyMenu> menus = myMenuService.selectList();
+        return menus.toArray(new MyMenu[menus.size()]);
     }
 }

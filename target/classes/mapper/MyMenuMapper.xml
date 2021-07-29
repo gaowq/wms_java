@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wms_java.mapper.MyMenuMapper">
+  <resultMap id="BaseResultMap" type="com.example.wms_java.model.MyMenu">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="code"  property="code" />
+    <result column="url" property="url" />
+    <result column="text" property="text" />
+    <result column="checked" jdbcType="BOOLEAN" property="checked" />
+    <result column="state" property="state" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    select id, parent_id, code, url, text, checked, state
+    from my_menu
+  </sql>
+
+  <select id="selectList" resultMap="BaseResultMap">
+    <include refid="Base_Column_List"/>
+  </select>
+</mapper>

@@ -1,0 +1,45 @@
+<body>
+
+<!--<input type="button" id="btn0" value="添加分类"/>-->
+<!--<br/>-->
+
+<label>名称</label>
+<input type="text" name="name"/>
+<label>规格</label>
+<input type="text" name="spec"/>
+<input type="button" id="btn1" value="搜索"/>
+
+<!--<input type="button" id="btn2" value="进货"/>-->
+<!--<input type="button" id="btn3" value="出货"/>-->
+<table id="dg"></table>
+
+
+<script type="text/javascript" th:inline="none">
+    $(function () {
+        $(document).ready(function() {
+            $("#btn1").click();
+        });
+
+
+        $("#btn1").click(function () {
+            $('#dg').datagrid({
+                title: '列表',
+                url: '/inventory/getList',
+                rownumbers: true,
+                pageList: [10, 20, 30],//选择一页显示多少数据
+                pagination: true,
+                columns: [[
+                    {field: 'name', title: '名称', width: 100},
+                    {field: 'spec', title: '规格', width: 100},
+                    {field: 'qty', title: '数量', width: 100},
+                    {field: 'location', title: '位置', width: 100},
+                    {field: 'min_qty', title: '最低库存数量', width: 100}
+                ]]
+            });
+        });
+
+    });
+</script>
+</body>
+
+

@@ -1,19 +1,25 @@
 package com.example.wms_java.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 /**
  * menu
+ *
  * @author
  */
 @Repository
-public class Menu implements Serializable {
+public class MyMenu implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
 
-    private Integer parentid;
+    private Integer parentId;
+
+    private String code;
 
     private String url;
 
@@ -23,7 +29,9 @@ public class Menu implements Serializable {
 
     private String state;
 
-    private Menu[] children;
+    private MyMenu[] children;
+
+    private List<MyMenu> childrenList;
 
     public Integer getId() {
         return id;
@@ -33,12 +41,20 @@ public class Menu implements Serializable {
         this.id = id;
     }
 
-    public Integer getParentid() {
-        return parentid;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getUrl() {
@@ -73,11 +89,27 @@ public class Menu implements Serializable {
         this.state = state;
     }
 
-    public Menu[] getChildren() {
+    public MyMenu[] getChildren() {
         return children;
     }
 
-    public void setChildren(Menu[] children) {
-        this.children = children;
+    public void setChildren(MyMenu[] myMenus) {
+        this.children = myMenus;
+    }
+
+    public void refreshChildren() {
+        if (this.childrenList == null || this.childrenList.stream().count() == 0) {
+            return;
+        }
+
+        this.children = this.childrenList.toArray(new MyMenu[childrenList.size()]);
+    }
+
+    public void addChildren(MyMenu children) {
+        if (childrenList == null) {
+            this.childrenList = new ArrayList<>();
+        }
+
+        this.childrenList.add(children);
     }
 }
