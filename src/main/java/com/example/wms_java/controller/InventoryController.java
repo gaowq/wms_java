@@ -47,4 +47,12 @@ public class InventoryController {
         int result = inventoryService.insertInventory(inventory);
         return CommonUtil.apiResult(result, "");
     }
+
+
+    @ResponseBody
+    @PostMapping("/delete")
+    public Map delete(@RequestBody Inventory inventory) {
+        int result = inventoryService.deleteInventoryById(inventory.getId());
+        return CommonUtil.apiResult(result, "");
+    }
 }

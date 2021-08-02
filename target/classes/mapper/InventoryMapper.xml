@@ -1,166 +1,180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.wms_java.mapper.InventoryMapper">
-  <resultMap id="BaseResultMap" type="com.example.wms_java.model.Inventory">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="spec" jdbcType="VARCHAR" property="spec" />
-    <result column="qty" jdbcType="INTEGER" property="qty" />
-    <result column="location" jdbcType="VARCHAR" property="location" />
-    <result column="min_qty" jdbcType="INTEGER" property="minQty" />
-    <result column="isdel" jdbcType="INTEGER" property="isdel" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="create_id" jdbcType="INTEGER" property="createId" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="update_id" jdbcType="INTEGER" property="updateId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    select id, `name`, spec, qty, `location`, min_qty, isdel, create_time, create_id, update_time,update_id
-    from inventory
-  </sql>
+    <resultMap id="BaseResultMap" type="com.example.wms_java.model.Inventory">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="spec" jdbcType="VARCHAR" property="spec"/>
+        <result column="qty" jdbcType="INTEGER" property="qty"/>
+        <result column="location" jdbcType="VARCHAR" property="location"/>
+        <result column="min_qty" jdbcType="INTEGER" property="minQty"/>
+        <result column="isdel" jdbcType="INTEGER" property="isdel"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_id" jdbcType="INTEGER" property="createId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_id" jdbcType="INTEGER" property="updateId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        select id,
+               `name`,
+               spec,
+               qty,
+               `location`,
+               min_qty,
+               isdel,
+               create_time,
+               create_id,
+               update_time,
+               update_id
+        from inventory
+    </sql>
 
-  <select id="selectList" resultMap="BaseResultMap">
-    <include refid="Base_Column_List"/>
-    <where>
-      <if test='name != null'> and `name` = #{name}</if>
-      <if test='location != null'> and location = #{location}</if>
-    </where>
-  </select>
+    <select id="selectList" resultMap="BaseResultMap">
+        <include refid="Base_Column_List"/>
+        <where>
+            and isdel = 0
+            <if test='name != null'>and `name` = #{name}</if>
+            <if test='location != null'>and location = #{location}</if>
+        </where>
+    </select>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    <include refid="Base_Column_List" />
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    update from inventory
-    set isdel = 1
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.wms_java.model.Inventory" useGeneratedKeys="true">
-    insert into inventory (`name`, spec, qty,
-      `location`, min_qty, isdel,
-      create_time, create_id, update_time,
-      update_id)
-    values (#{name,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, #{qty,jdbcType=INTEGER},
-      #{location,jdbcType=VARCHAR}, #{minQty,jdbcType=INTEGER}, #{isdel,jdbcType=INTEGER},
-      #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP},
-      #{updateId,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.wms_java.model.Inventory" useGeneratedKeys="true">
-    insert into inventory
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        `name`,
-      </if>
-      <if test="spec != null">
-        spec,
-      </if>
-      <if test="qty != null">
-        qty,
-      </if>
-      <if test="location != null">
-        `location`,
-      </if>
-      <if test="minQty != null">
-        min_qty,
-      </if>
-      <if test="isdel != null">
-        isdel,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="createId != null">
-        create_id,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="updateId != null">
-        update_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="spec != null">
-        #{spec,jdbcType=VARCHAR},
-      </if>
-      <if test="qty != null">
-        #{qty,jdbcType=INTEGER},
-      </if>
-      <if test="location != null">
-        #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="minQty != null">
-        #{minQty,jdbcType=INTEGER},
-      </if>
-      <if test="isdel != null">
-        #{isdel,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createId != null">
-        #{createId,jdbcType=INTEGER},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateId != null">
-        #{updateId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.wms_java.model.Inventory">
-    update inventory
-    <set>
-      <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="spec != null">
-        spec = #{spec,jdbcType=VARCHAR},
-      </if>
-      <if test="qty != null">
-        qty = #{qty,jdbcType=INTEGER},
-      </if>
-      <if test="location != null">
-        `location` = #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="minQty != null">
-        min_qty = #{minQty,jdbcType=INTEGER},
-      </if>
-      <if test="isdel != null">
-        isdel = #{isdel,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createId != null">
-        create_id = #{createId,jdbcType=INTEGER},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateId != null">
-        update_id = #{updateId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.wms_java.model.Inventory">
-    update inventory
-    set `name` = #{name,jdbcType=VARCHAR},
-      spec = #{spec,jdbcType=VARCHAR},
-      qty = #{qty,jdbcType=INTEGER},
-      `location` = #{location,jdbcType=VARCHAR},
-      min_qty = #{minQty,jdbcType=INTEGER},
-      isdel = #{isdel,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_id = #{createId,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_id = #{updateId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <include refid="Base_Column_List"/>
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        update inventory
+        set isdel      = 1,
+            update_time=current_date()
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.wms_java.model.Inventory"
+            useGeneratedKeys="true">
+        insert into inventory (`name`, spec, qty,
+                               `location`, min_qty,
+                               create_time, create_id, update_time,
+                               update_id)
+        values (#{name,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, #{qty,jdbcType=INTEGER},
+                #{location,jdbcType=VARCHAR}, #{minQty,jdbcType=INTEGER},
+                #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP},
+                #{updateId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.wms_java.model.Inventory"
+            useGeneratedKeys="true">
+        insert into inventory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="spec != null">
+                spec,
+            </if>
+            <if test="qty != null">
+                qty,
+            </if>
+            <if test="location != null">
+                `location`,
+            </if>
+            <if test="minQty != null">
+                min_qty,
+            </if>
+            <if test="isdel != null">
+                isdel,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createId != null">
+                create_id,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateId != null">
+                update_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="spec != null">
+                #{spec,jdbcType=VARCHAR},
+            </if>
+            <if test="qty != null">
+                #{qty,jdbcType=INTEGER},
+            </if>
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="minQty != null">
+                #{minQty,jdbcType=INTEGER},
+            </if>
+            <if test="isdel != null">
+                #{isdel,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                #{updateId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.wms_java.model.Inventory">
+        update inventory
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="spec != null">
+                spec = #{spec,jdbcType=VARCHAR},
+            </if>
+            <if test="qty != null">
+                qty = #{qty,jdbcType=INTEGER},
+            </if>
+            <if test="location != null">
+                `location` = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="minQty != null">
+                min_qty = #{minQty,jdbcType=INTEGER},
+            </if>
+            <if test="isdel != null">
+                isdel = #{isdel,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                create_id = #{createId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                update_id = #{updateId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.example.wms_java.model.Inventory">
+        update inventory
+        set `name`      = #{name,jdbcType=VARCHAR},
+            spec        = #{spec,jdbcType=VARCHAR},
+            qty         = #{qty,jdbcType=INTEGER},
+            `location`  = #{location,jdbcType=VARCHAR},
+            min_qty     = #{minQty,jdbcType=INTEGER},
+            isdel       = #{isdel,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_id   = #{createId,jdbcType=INTEGER},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            update_id   = #{updateId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

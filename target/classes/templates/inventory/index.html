@@ -61,29 +61,44 @@
 
 </div>
 
+<div id="diaInOutstore" class="easyui-dialog" title="My Dialog"
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    <table>
+        <input type="hidden" id="storeId"/>
+        <tr>
+            <td>名称</td>
+            <td>
+                <label id="diain_name"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>规格</td>
+            <td>
+                <label id="diain_spec"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>数量</td>
+            <td>
+                <input class="easyui-textbox" name="qty" id="diain_qty"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" style="text-align: right;">
+                <a id="btnin_save" style="margin-left: 20px;" href="#" class="easyui-linkbutton">保存</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
 
 <script type="text/javascript" th:inline="none">
     $(function () {
         $(document).ready(function () {
             refresh();
         });
-
-        function refresh(){
-            $('#dg').datagrid({
-                title: '列表',
-                url: '/inventory/getList',
-                rownumbers: true,
-                pageList: [10, 20, 30],//选择一页显示多少数据
-                pagination: true,
-                columns: [[
-                    {field: 'name', title: '名称', width: 100},
-                    {field: 'spec', title: '规格', width: 100},
-                    {field: 'qty', title: '数量', width: 100},
-                    {field: 'location', title: '位置', width: 100},
-                    {field: 'minQty', title: '最低库存数量', width: 100}
-                ]]
-            });
-        }
 
         function myShow(msg) {
             $.messager.show({
@@ -119,11 +134,11 @@
 
                 $.ajax({
                     url: "/inventory/add",
-                   // data: model,
+                    // data: model,
                     type: "POST",
-                    data : JSON.stringify(model),
-                    dataType : 'json',
-                    contentType : 'application/json;charset=utf-8',
+                    data: JSON.stringify(model),
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
                     success: function (data) {
                         if (data.status > 0) {
                             myShow("添加成功");
@@ -136,6 +151,105 @@
                 });
             })
         });
+
+
+        function operation(value, row, index) {
+            var Action = "<a href='javascript:void(0);' onclick='inStore(" + row.id + "," + "\"" + row.name + "\"" + "," + "\"" + row.spec + "\"" + ")'>入库</a>\
+                                    | <a href='javascript:void(0);' onclick='outStore(" + row.id + "," + "\"" + row.name + "\"" + "," + "\"" + row.spec + "\"" + ")'>出库</a>\
+                                    | <a href='javascript:void(0);' onclick='editRow(" + row.id + ")'>修改</a>\
+                                    | <a href='javascript:void(0);' onclick='deleteRow(" + row.id + ")'>删除</a>";
+            return Action;
+        }
+
+        inStore = function (id, name, spec) {
+
+            inoutStore("入库", id, name, spec, "/inventory/addInDetail");
+        };
+
+        outStore = function (id, name, spec) {
+            inoutStore("出库", id, name, spec, "/inventory/addOutDetail")
+        }
+
+        deleteRow = function (id) {
+
+            var model = {
+                id: id
+            }
+
+            $.ajax({
+                url: "/inventory/delete",
+                type: "POST",
+                data: JSON.stringify(model),
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    if (data.status > 0) {
+                        myShow("删除成功");
+                        refresh();
+                    } else {
+                        myShow("删除失败");
+                    }
+                }
+            });
+        }
+
+        function inoutStore(title, id, name, spec, url) {
+            $('#diaInOutstore').dialog('open').dialog({
+                title: title,
+                width: 288,
+                height: 250,
+                modal: true,
+                closed: false
+            });
+            $("#storeId").val(id);
+            $("#diain_name").text(name);
+            $("#diain_spec").text(spec);
+            $("#diain_qty").textbox("setValue", "");
+
+            $('#btnin_save').click(function () {
+                var model = {
+                    id: $('#storeId').val(),
+                    qty: $('#diain_qty').textbox('getValue')
+                }
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: JSON.stringify(model),
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (data) {
+                        if (data.status > 0) {
+                            myShow("添加成功");
+                            $("#diaEdit").window('close');
+                            refresh();
+                        } else {
+                            myShow("添加失败");
+                        }
+                    }
+                });
+            })
+        };
+
+        function refresh() {
+            $('#dg').datagrid({
+                title: '列表',
+                url: '/inventory/getList',
+                rownumbers: true,
+                pageList: [10, 20, 30],//选择一页显示多少数据
+                pagination: true,
+                columns: [[
+                    {field: 'name', title: '名称', width: 100},
+                    {field: 'spec', title: '规格', width: 100},
+                    {field: 'qty', title: '数量', width: 100},
+                    {field: 'location', title: '位置', width: 100},
+                    {field: 'minQty', title: '最低库存数量', width: 100},
+                    {
+                        field: 'operation', title: '操作', width: 200, formatter: operation
+                    }
+                ]]
+            });
+        }
     });
 </script>
 </body>
