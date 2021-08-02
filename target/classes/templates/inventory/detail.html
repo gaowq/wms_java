@@ -1,0 +1,92 @@
+<body>
+
+<!--<input type="button" id="btn0" value="添加分类"/>-->
+<!--<br/>-->
+
+<div style="margin:10px 10px 10px 10px;">
+    <a id="inBtn" style="margin-left: 20px;margin-bottom: 20px;" href="#" class="easyui-linkbutton">入库</a>
+    <a id="outBtn" style="margin-left: 20px;margin-bottom: 20px;" href="#" class="easyui-linkbutton">出库</a>
+    <br/>
+
+    <label>名称</label>
+    <input class="easyui-textbox" name="name"/>
+    <label style="margin-left: 20px;">规格</label>
+    <input class="easyui-textbox" type="text" name="spec"/>
+    <label style="margin-left: 20px;">位置</label>
+    <select id="cc" class="easyui-combobox" name="position" style="width:200px;">
+    </select>
+    <a id="btndetail" style="margin-left: 20px;" href="#" class="easyui-linkbutton">搜索</a>
+
+    <a id="btnAdd" style="margin-left: 20px;" href="#" class="easyui-linkbutton"
+       data-options="iconCls:'icon-add'"></a>
+</div>
+
+<!--<input type="button" id="btn2" value="进货"/>-->
+<!--<input type="button" id="btn3" value="出货"/>-->
+<div style="margin:10px 10px 10px 10px;">
+    <table id="dg2"></table>
+</div>
+
+<div id="diaEdit" class="easyui-dialog" title="My Dialog"
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    <label>名称</label>
+    <input class="easyui-textbox" name="name" id="dia_name"/>
+</div>
+
+
+<script type="text/javascript" th:inline="none">
+    $(function () {
+        $(document).ready(function () {
+            //$("#btn1").click();
+        });
+
+
+        // $("#btn1").click(function () {
+        //     $('#dg').datagrid({
+        //         title: '列表',
+        //         url: '/inventory/getList',
+        //         rownumbers: true,
+        //         pageList: [10, 20, 30],//选择一页显示多少数据
+        //         pagination: true,
+        //         columns: [[
+        //             {field: 'name', title: '名称', width: 100},
+        //             {field: 'spec', title: '规格', width: 100},
+        //             {field: 'qty', title: '数量', width: 100},
+        //             {field: 'location', title: '位置', width: 100},
+        //             {field: 'min_qty', title: '最低库存数量', width: 100}
+        //         ]]
+        //     });
+        // });
+
+        $("#btnAdd").click(function () {
+            $('#diaEdit').dialog('open').dialog({
+                title: "添加流程",
+                width: 350,
+                height: 250,
+                modal: true,
+                closed: false
+            });
+            //$("#dia_name").textbox("setValue", "默认");
+            // var row = $('#dg').datagrid('getSelected');
+            // if (row) {
+            //     $('#diaEdit').dialog('open').dialog({
+            //         title: "编辑流程",
+            //         width: 350,
+            //         height: 250,
+            //         modal: true
+            //     });
+            //     $("#txtID").val(row.FlowID);
+            //     $("#txtName").val(row.Name);
+            //     $("#txtSort").val(row.Sort);
+            //     $("#txtState").val(row.IsUse);
+            //     $("#txtUrl").val(row.Url);
+            // } else {
+            //     $.messager.alert("提示", "请选中要编辑的行！");
+            // }
+        });
+
+    });
+</script>
+</body>
+
+

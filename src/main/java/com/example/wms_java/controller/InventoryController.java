@@ -2,13 +2,18 @@ package com.example.wms_java.controller;
 
 import com.example.wms_java.model.Inventory;
 import com.example.wms_java.service.impl.InventoryService;
+import com.example.wms_java.util.CommonUtil;
 import com.github.pagehelper.PageHelper;
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 //@RestController
 @Controller
@@ -18,9 +23,14 @@ public class InventoryController {
     private InventoryService inventoryService;
 
     @GetMapping("/index")
-    public String my2(HttpServletRequest request) {
+    public String index(HttpServletRequest request) {
         //request.setAttribute("key", "游客");
         return "/inventory/index";
+    }
+
+    @GetMapping("/detail")
+    public String detail(HttpServletRequest request) {
+        return "/inventory/detail";
     }
 
     @ResponseBody
@@ -28,5 +38,13 @@ public class InventoryController {
     public List<Inventory> getTable3(Inventory inventory) {
         PageHelper.startPage(inventory.getPage(), inventory.getRows(), inventory.getOrderBy());
         return inventoryService.selectList(inventory);
+    }
+
+    @ResponseBody
+    @PostMapping("/add")
+    public Map add(@RequestBody Inventory inventory) {
+        inventory.setCreateTime(new Date());
+        int result = inventoryService.insertInventory(inventory);
+        return CommonUtil.apiResult(result, "");
     }
 }

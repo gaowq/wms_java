@@ -3,25 +3,72 @@
 <!--<input type="button" id="btn0" value="添加分类"/>-->
 <!--<br/>-->
 
-<label>名称</label>
-<input type="text" name="name"/>
-<label>规格</label>
-<input type="text" name="spec"/>
-<input type="button" id="btn1" value="搜索"/>
+<div style="margin:10px 10px 10px 10px;">
+    <label>名称</label>
+    <input class="easyui-textbox" name="name"/>
+    <label style="margin-left: 20px;">规格</label>
+    <input class="easyui-textbox" type="text" name="spec"/>
+    <label style="margin-left: 20px;">位置</label>
+    <select id="cc" class="easyui-combobox" name="position" style="width:200px;">
+    </select>
+    <a id="btn1" style="margin-left: 20px;" href="#" class="easyui-linkbutton">搜索</a>
+
+    <a id="btnAdd" style="margin-left: 20px;" href="#" class="easyui-linkbutton"
+       data-options="iconCls:'icon-add'">添加</a>
+    <!--    data-options="iconCls:'icon-blank'"-->
+</div>
 
 <!--<input type="button" id="btn2" value="进货"/>-->
 <!--<input type="button" id="btn3" value="出货"/>-->
-<table id="dg"></table>
+<div style="margin:10px 10px 10px 10px;">
+    <table id="dg"></table>
+</div>
+
+<div id="diaEdit" class="easyui-dialog" title="My Dialog"
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    <table>
+        <tr>
+            <td>名称</td>
+            <td>
+                <input class="easyui-textbox" name="name" id="dia_name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>规格</td>
+            <td>
+                <input class="easyui-textbox" name="spec" id="dia_spec"/>
+            </td>
+        </tr>
+        <tr>
+            <td>数量</td>
+            <td>
+                <input class="easyui-textbox" name="qty" id="dia_qty"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>最低库存数量</td>
+            <td>
+                <input class="easyui-textbox" name="minqty" id="dia_minqty"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right;">
+                <a id="btn_save" style="margin-left: 20px;" href="#" class="easyui-linkbutton">添加</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
 
 
 <script type="text/javascript" th:inline="none">
     $(function () {
-        $(document).ready(function() {
-            $("#btn1").click();
+        $(document).ready(function () {
+            refresh();
         });
 
-
-        $("#btn1").click(function () {
+        function refresh(){
             $('#dg').datagrid({
                 title: '列表',
                 url: '/inventory/getList',
@@ -33,11 +80,62 @@
                     {field: 'spec', title: '规格', width: 100},
                     {field: 'qty', title: '数量', width: 100},
                     {field: 'location', title: '位置', width: 100},
-                    {field: 'min_qty', title: '最低库存数量', width: 100}
+                    {field: 'minQty', title: '最低库存数量', width: 100}
                 ]]
             });
+        }
+
+        function myShow(msg) {
+            $.messager.show({
+                title: '提示',
+                msg: msg,
+                timeout: 2000,
+                showType: 'slide'
+            });
+        }
+
+        $("#btn1").click(function () {
+            refresh();
         });
 
+        $("#btnAdd").click(function () {
+
+            $('#diaEdit').dialog('open').dialog({
+                title: "添加库存",
+                width: 288,
+                height: 250,
+                modal: true,
+                closed: false
+            });
+            //$("#dia_name").textbox("setValue", "默认");
+
+            $('#btn_save').click(function () {
+                var model = {
+                    name: $('#dia_name').textbox('getValue'),
+                    spec: $('#dia_spec').textbox('getValue'),
+                    qty: $('#dia_qty').textbox('getValue'),
+                    minQty: $('#dia_minqty').textbox('getValue')
+                }
+
+                $.ajax({
+                    url: "/inventory/add",
+                   // data: model,
+                    type: "POST",
+                    data : JSON.stringify(model),
+                    dataType : 'json',
+                    contentType : 'application/json;charset=utf-8',
+                    success: function (data) {
+                        if (data.status > 0) {
+                            myShow("添加成功");
+                            $("#diaEdit").window('close');
+                            refresh();
+                        } else {
+                            myShow("添加失败");
+                        }
+                    }
+                });
+            })
+        });
     });
 </script>
 </body>
