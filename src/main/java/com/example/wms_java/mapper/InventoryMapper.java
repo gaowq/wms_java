@@ -2,6 +2,7 @@ package com.example.wms_java.mapper;
 
 import com.example.wms_java.model.Inventory;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface InventoryMapper {
     int updateByPrimaryKeySelective(Inventory record);
 
     int updateByPrimaryKey(Inventory record);
+
+    int addInventory(@Param("id") Integer inventoryId, @Param("quantity") int qty);
+
+    int minusInventory(@Param("id") Integer inventoryId, @Param("quantity") int qty);
 }

@@ -5,18 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f340ef55-67c5-4710-a912-b5e5c349f497" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryDetailController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/IInventoryDetailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/impl/InventoryDetailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/util/CommonConstant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9c4c1832-0d20-434d-9b04-b4eeb8c47703.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9c4c1832-0d20-434d-9b04-b4eeb8c47703.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/free-mybatis-generator-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/free-mybatis-generator-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/afbc8846-e4eb-40ac-86f2-f97542072073.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/afbc8846-e4eb-40ac-86f2-f97542072073.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/afbc8846-e4eb-40ac-86f2-f97542072073/storage_v2/_src_/database/shenliwater.cagoe.com.QA3cUQ/schema/dbo.sYMBAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/afbc8846-e4eb-40ac-86f2-f97542072073/storage_v2/_src_/database/shenliwater.cagoe.com.QA3cUQ/schema/dbo.sYMBAA.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/inventory/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/inventory/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/inventory/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/mapper/InventoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/mapper/InventoryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/impl/InventoryDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/impl/InventoryDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/InventoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/InventoryMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +72,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/inventory" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -105,13 +100,15 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -141,7 +138,8 @@
       <workItem from="1627453834670" duration="25604000" />
       <workItem from="1627634603262" duration="15985000" />
       <workItem from="1627895396730" duration="1370000" />
-      <workItem from="1627917765002" duration="12561000" />
+      <workItem from="1627917765002" duration="13618000" />
+      <workItem from="1627982025667" duration="2732000" />
     </task>
     <servers />
   </component>

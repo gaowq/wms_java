@@ -165,16 +165,28 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.example.wms_java.model.Inventory">
         update inventory
-        set `name`      = #{name,jdbcType=VARCHAR},
-            spec        = #{spec,jdbcType=VARCHAR},
-            qty         = #{qty,jdbcType=INTEGER},
-            `location`  = #{location,jdbcType=VARCHAR},
-            min_qty     = #{minQty,jdbcType=INTEGER},
-            isdel       = #{isdel,jdbcType=INTEGER},
-            create_time = #{createTime,jdbcType=TIMESTAMP},
-            create_id   = #{createId,jdbcType=INTEGER},
-            update_time = #{updateTime,jdbcType=TIMESTAMP},
-            update_id   = #{updateId,jdbcType=INTEGER}
-        where id = #{id,jdbcType=INTEGER}
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="spec != null">spec = #{spec},</if>
+            <if test="qty != null">qty = #{qty},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="minQty != null">min_qty = #{minQty},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateId != null">update_id = #{updateId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="addInventory">
+        update inventory
+        set qty=qty + #{quantity}
+        where id = #{id}
+    </update>
+
+    <update id="minusInventory">
+        update inventory
+        set qty=qty - #{quantity}
+        where id = #{id}
+          and qty >= #{quantity}
     </update>
 </mapper>
