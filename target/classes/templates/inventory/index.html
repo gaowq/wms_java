@@ -163,15 +163,14 @@
 
         inStore = function (id, name, spec) {
 
-            inoutStore("入库", id, name, spec, "/inventory/addInDetail");
+            inoutStore("入库", id, name, spec, "/inventoryDetail/addIn");
         };
 
         outStore = function (id, name, spec) {
-            inoutStore("出库", id, name, spec, "/inventory/addOutDetail")
+            inoutStore("出库", id, name, spec, "/inventoryDetail/addOut")
         }
 
         deleteRow = function (id) {
-
             var model = {
                 id: id
             }
@@ -208,7 +207,7 @@
 
             $('#btnin_save').click(function () {
                 var model = {
-                    id: $('#storeId').val(),
+                    inventoryId: id,
                     qty: $('#diain_qty').textbox('getValue')
                 }
 

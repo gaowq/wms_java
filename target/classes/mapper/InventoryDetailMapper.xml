@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wms_java.mapper.InventoryDetailMapper">
+    <resultMap id="BaseResultMap" type="com.example.wms_java.model.InventoryDetail">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="inventory_id" jdbcType="INTEGER" property="inventoryId"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="qty" jdbcType="INTEGER" property="qty"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_id" jdbcType="INTEGER" property="createId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_id" jdbcType="INTEGER" property="updateId"/>
+        <result column="isdel" jdbcType="INTEGER" property="isdel"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        select id,
+               inventory_id,
+               `type`,
+               qty,
+               create_time,
+               create_id,
+               update_time,
+               update_id,
+               isdel
+        from inventory_detail
+    </sql>
+    <select id="selectList" resultMap="BaseResultMap">
+        <include refid="Base_Column_List"/>
+        <where>
+            and isdel = 0
+            <if test='inventoryId != null'>and inventory_id = #{inventoryId}</if>
+        </where>
+    </select>
+
+    <insert id="insertInventoryDetail" keyColumn="id" keyProperty="id" parameterType="com.example.wms_java.model.InventoryDetail"
+            useGeneratedKeys="true">
+        insert into inventory_detail (inventory_id, `type`, qty,
+                                      create_time, create_id, update_time,
+                                      update_id)
+        values (#{inventoryId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{qty,jdbcType=INTEGER},
+                current_date(), #{createId,jdbcType=INTEGER},current_date(),
+                #{updateId,jdbcType=INTEGER})
+    </insert>
+    <update id="updateInventoryDetail" parameterType="com.example.wms_java.model.InventoryDetail">
+        update inventory_detail
+        set inventory_id = #{inventoryId,jdbcType=INTEGER},
+            `type`       = #{type,jdbcType=INTEGER},
+            qty          = #{qty,jdbcType=INTEGER},
+            update_time  = current_date(),
+            update_id    = #{updateId,jdbcType=INTEGER},
+            isdel        = #{isdel,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="deleteById" parameterType="java.lang.Integer">
+        update inventory_detail
+        set isdel = 1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

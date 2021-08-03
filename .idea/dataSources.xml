@@ -15,5 +15,12 @@
       <jdbc-url>jdbc:mysql://81.68.104.162:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="Microsoft SQL Server - shenliwater.cagoe.com@58.211.23.198" uuid="afbc8846-e4eb-40ac-86f2-f97542072073">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://58.211.23.198;database=shenliwater.cagoe.com</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

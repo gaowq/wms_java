@@ -1,6 +1,7 @@
 package com.example.wms_java.controller;
 
 import com.example.wms_java.model.Inventory;
+import com.example.wms_java.model.InventoryDetail;
 import com.example.wms_java.service.impl.InventoryService;
 import com.example.wms_java.util.CommonUtil;
 import com.github.pagehelper.PageHelper;
