@@ -35,7 +35,7 @@ public class HomeController {
     @GetMapping("/")
     public String my(HttpServletRequest request) {
         request.setAttribute("key", "游客");
-        return "/index";
+        return "index";
     }
 
     @ResponseBody

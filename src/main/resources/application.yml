@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     name: mssqlDB
-    url: jdbc:mysql://localhost:3306/wms?allowPublicKeyRetrieval=true
+    url: jdbc:mysql://81.68.104.162:3306/wms?allowPublicKeyRetrieval=true&serverTimeZone=UTC
     username: root
-    password: 12345678
+    password: xaXu4q8h<t5
   thymeleaf:
     prefix: classpath:/templates/
     #开发，不需要重启

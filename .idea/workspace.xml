@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="wms_java:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f340ef55-67c5-4710-a912-b5e5c349f497" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/afbc8846-e4eb-40ac-86f2-f97542072073.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/afbc8846-e4eb-40ac-86f2-f97542072073.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/afbc8846-e4eb-40ac-86f2-f97542072073/storage_v2/_src_/database/shenliwater.cagoe.com.QA3cUQ/schema/dbo.sYMBAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/afbc8846-e4eb-40ac-86f2-f97542072073/storage_v2/_src_/database/shenliwater.cagoe.com.QA3cUQ/schema/dbo.sYMBAA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/wms_java_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/65c0fec4-9e6a-45a5-814d-80e7a6a5a5ae.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/65c0fec4-9e6a-45a5-814d-80e7a6a5a5ae.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/mapper/InventoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/mapper/InventoryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/impl/InventoryDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/impl/InventoryDetailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/InventoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/InventoryMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/WmsJavaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/WmsJavaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/inventory/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/inventory/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/inventory/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,10 +93,10 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3402299" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -139,7 +152,7 @@
       <workItem from="1627634603262" duration="15985000" />
       <workItem from="1627895396730" duration="1370000" />
       <workItem from="1627917765002" duration="13618000" />
-      <workItem from="1627982025667" duration="2732000" />
+      <workItem from="1627982025667" duration="15297000" />
     </task>
     <servers />
   </component>

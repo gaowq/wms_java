@@ -31,7 +31,7 @@ public class InventoryDetailController {
 
     @GetMapping("/detail")
     public String detail(HttpServletRequest request) {
-        return "/inventory/detail";
+        return "inventory/detail";
     }
 
     @ResponseBody

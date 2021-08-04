@@ -162,12 +162,13 @@
         }
 
         inStore = function (id, name, spec) {
-
             inoutStore("入库", id, name, spec, "/inventoryDetail/addIn");
+            return false;
         };
 
         outStore = function (id, name, spec) {
             inoutStore("出库", id, name, spec, "/inventoryDetail/addOut")
+            return false;
         }
 
         deleteRow = function (id) {
@@ -205,7 +206,7 @@
             $("#diain_spec").text(spec);
             $("#diain_qty").textbox("setValue", "");
 
-            $('#btnin_save').click(function () {
+            $('#btnin_save').unbind('click').click(function () {
                 var model = {
                     inventoryId: id,
                     qty: $('#diain_qty').textbox('getValue')
@@ -227,6 +228,8 @@
                         }
                     }
                 });
+
+                return false;
             })
         };
 

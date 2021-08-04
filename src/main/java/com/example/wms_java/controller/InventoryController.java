@@ -26,7 +26,7 @@ public class InventoryController {
     @GetMapping("/index")
     public String index(HttpServletRequest request) {
         //request.setAttribute("key", "游客");
-        return "/inventory/index";
+        return "inventory/index";
     }
 
     @GetMapping("/detail")
