@@ -6,6 +6,7 @@
         <result column="inventory_id" jdbcType="INTEGER" property="inventoryId"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="qty" jdbcType="INTEGER" property="qty"/>
+        <result column="price" property="price"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="create_id" jdbcType="INTEGER" property="createId"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
@@ -17,6 +18,7 @@
                inventory_id,
                `type`,
                qty,
+               price,
                create_time,
                create_id,
                update_time,
@@ -28,17 +30,35 @@
         <include refid="Base_Column_List"/>
         <where>
             and isdel = 0
-            <if test='inventoryId != null'>and inventory_id = #{inventoryId}</if>
+            <if test="inventoryId != null and inventoryId != ''">and inventory_id = #{inventoryId}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
         </where>
+
+        order by id desc
     </select>
 
-    <insert id="insertInventoryDetail" keyColumn="id" keyProperty="id" parameterType="com.example.wms_java.model.InventoryDetail"
+    <select id="selectLatestIn" resultMap="BaseResultMap">
+        <include refid="Base_Column_List"/>
+        where inventory_id = #{id} and isdel = 0 and type = 1
+        order by id desc
+        limit 1
+    </select>
+
+    <select id="selectLatestOut" resultMap="BaseResultMap">
+        <include refid="Base_Column_List"/>
+        where inventory_id = #{id} and isdel = 0 and type = 2
+        order by id desc
+        limit 1
+    </select>
+
+    <insert id="insertInventoryDetail" keyColumn="id" keyProperty="id"
+            parameterType="com.example.wms_java.model.InventoryDetail"
             useGeneratedKeys="true">
-        insert into inventory_detail (inventory_id, `type`, qty,
+        insert into inventory_detail (inventory_id, `type`, qty,price,
                                       create_time, create_id, update_time,
                                       update_id)
-        values (#{inventoryId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{qty,jdbcType=INTEGER},
-                current_date(), #{createId,jdbcType=INTEGER},current_date(),
+        values (#{inventoryId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{qty,jdbcType=INTEGER},#{price},
+                current_time(), #{createId,jdbcType=INTEGER}, current_time(),
                 #{updateId,jdbcType=INTEGER})
     </insert>
     <update id="updateInventoryDetail" parameterType="com.example.wms_java.model.InventoryDetail">
@@ -46,7 +66,8 @@
         set inventory_id = #{inventoryId,jdbcType=INTEGER},
             `type`       = #{type,jdbcType=INTEGER},
             qty          = #{qty,jdbcType=INTEGER},
-            update_time  = current_date(),
+            price =#{price},
+            update_time  = current_time(),
             update_id    = #{updateId,jdbcType=INTEGER},
             isdel        = #{isdel,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}

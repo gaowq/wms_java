@@ -1057,46 +1057,52 @@ SELECT|sys.sys_config
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <key id="318" parent="290" name="PRIMARY">
+    <column id="318" parent="290" name="price">
+      <Position>10</Position>
+      <DataType>decimal(9,2 digit)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0.00</DefaultExpression>
+    </column>
+    <key id="319" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="319" parent="291" name="id">
+    <column id="320" parent="291" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="320" parent="291" name="parent_id">
+    <column id="321" parent="291" name="parent_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="321" parent="291" name="url">
+    <column id="322" parent="291" name="url">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <Collation>utf8_general_ci</Collation>
     </column>
-    <column id="322" parent="291" name="text">
+    <column id="323" parent="291" name="text">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <Collation>utf8_general_ci</Collation>
     </column>
-    <column id="323" parent="291" name="checked">
+    <column id="324" parent="291" name="checked">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <column id="324" parent="291" name="state">
+    <column id="325" parent="291" name="state">
       <Position>6</Position>
       <DataType>varchar(50)|0s</DataType>
       <Collation>utf8_general_ci</Collation>
     </column>
-    <column id="325" parent="291" name="code">
+    <column id="326" parent="291" name="code">
       <Position>7</Position>
       <DataType>varchar(50)|0s</DataType>
       <Collation>utf8_general_ci</Collation>
     </column>
-    <key id="326" parent="291" name="PRIMARY">
+    <key id="327" parent="291" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

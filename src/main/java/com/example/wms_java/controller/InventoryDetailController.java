@@ -6,7 +6,9 @@ import com.example.wms_java.service.impl.InventoryDetailService;
 import com.example.wms_java.service.impl.InventoryService;
 import com.example.wms_java.util.CommonConstant;
 import com.example.wms_java.util.CommonUtil;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,11 +38,10 @@ public class InventoryDetailController {
 
     @ResponseBody
     @PostMapping("/getList")
-    public List<InventoryDetail> getTable3(InventoryDetail inventoryDetail) {
+    public Map getList(InventoryDetail inventoryDetail) {
         PageHelper.startPage(inventoryDetail.getPage(), inventoryDetail.getRows(), inventoryDetail.getOrderBy());
-        return inventoryDetailService.selectList(inventoryDetail);
+        return CommonUtil.getDataTable(inventoryDetailService.selectList(inventoryDetail));
     }
-
 
     @ResponseBody
     @PostMapping("/addIn")

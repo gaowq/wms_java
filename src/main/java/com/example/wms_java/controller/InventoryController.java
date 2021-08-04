@@ -31,14 +31,14 @@ public class InventoryController {
 
     @GetMapping("/detail")
     public String detail(HttpServletRequest request) {
-        return "/inventory/detail";
+        return "inventory/detail";
     }
 
     @ResponseBody
     @PostMapping("/getList")
-    public List<Inventory> getTable3(Inventory inventory) {
+    public Map getList(Inventory inventory) {
         PageHelper.startPage(inventory.getPage(), inventory.getRows(), inventory.getOrderBy());
-        return inventoryService.selectList(inventory);
+        return CommonUtil.getDataTable(inventoryService.selectList(inventory));
     }
 
     @ResponseBody

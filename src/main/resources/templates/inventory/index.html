@@ -5,11 +5,16 @@
 
 <div style="margin:10px 10px 10px 10px;">
     <label>名称</label>
-    <input class="easyui-textbox" name="name"/>
+    <input class="easyui-textbox" name="name" id="search_name"/>
     <label style="margin-left: 20px;">规格</label>
-    <input class="easyui-textbox" type="text" name="spec"/>
+    <input class="easyui-textbox" name="spec" id="search_spec"/>
     <label style="margin-left: 20px;">位置</label>
-    <select id="cc" class="easyui-combobox" name="position" style="width:200px;">
+    <input class="easyui-textbox" name="location" id="search_location"/>
+    <label style="margin-left: 20px;">是否需要补货</label>
+    <select id="isNeedAdd" class="easyui-combobox" style="width: 200px;" name="isNeedAdd">
+        <option value="">全部</option>
+        <option value="1">是</option>
+        <option value="2">否</option>
     </select>
     <a id="btn1" style="margin-left: 20px;" href="#" class="easyui-linkbutton">搜索</a>
 
@@ -40,6 +45,12 @@
             </td>
         </tr>
         <tr>
+            <td>位置</td>
+            <td>
+                <input class="easyui-textbox" name="location" id="dia_location"/>
+            </td>
+        </tr>
+        <tr>
             <td>数量</td>
             <td>
                 <input class="easyui-textbox" name="qty" id="dia_qty"/>
@@ -52,6 +63,8 @@
                 <input class="easyui-textbox" name="minqty" id="dia_minqty"/>
             </td>
         </tr>
+
+
         <tr>
             <td colspan="2" style="text-align: right;">
                 <a id="btn_save" style="margin-left: 20px;" href="#" class="easyui-linkbutton">添加</a>
@@ -81,6 +94,13 @@
             <td>数量</td>
             <td>
                 <input class="easyui-textbox" name="qty" id="diain_qty"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>价格</td>
+            <td>
+                <input class="easyui-textbox" name="price" id="diain_price"/>
             </td>
         </tr>
 
@@ -129,6 +149,7 @@
                     name: $('#dia_name').textbox('getValue'),
                     spec: $('#dia_spec').textbox('getValue'),
                     qty: $('#dia_qty').textbox('getValue'),
+                    location: $('#dia_location').textbox('getValue'),
                     minQty: $('#dia_minqty').textbox('getValue')
                 }
 
@@ -150,24 +171,33 @@
                     }
                 });
             })
+
+            return false;
         });
 
+        function isNeedAdd(value, row, index) {
+            if (row.minQty > row.qty) {
+                return "<font color='red'>是</font>";
+            } else {
+                return "否";
+            }
+        }
 
         function operation(value, row, index) {
-            var Action = "<a href='javascript:void(0);' onclick='inStore(" + row.id + "," + "\"" + row.name + "\"" + "," + "\"" + row.spec + "\"" + ")'>入库</a>\
-                                    | <a href='javascript:void(0);' onclick='outStore(" + row.id + "," + "\"" + row.name + "\"" + "," + "\"" + row.spec + "\"" + ")'>出库</a>\
+            var Action = "<a href='javascript:void(0);' onclick='inStore(" + row.id + "," + "\"" + row.name + "\"" + "," + "\"" + row.spec + "\"" + "," + "\"" + row.lastInPrice + "\"" + ")'>入库</a>\
+                                    | <a href='javascript:void(0);' onclick='outStore(" + row.id + "," + "\"" + row.name + "\"" + "," + "\"" + row.spec + "\"" + "," + "\"" + row.lastOutPrice + "\"" + ")'>出库</a>\
                                     | <a href='javascript:void(0);' onclick='editRow(" + row.id + ")'>修改</a>\
                                     | <a href='javascript:void(0);' onclick='deleteRow(" + row.id + ")'>删除</a>";
             return Action;
         }
 
-        inStore = function (id, name, spec) {
-            inoutStore("入库", id, name, spec, "/inventoryDetail/addIn");
+        inStore = function (id, name, spec, price) {
+            inoutStore("入库", id, name, spec, "/inventoryDetail/addIn", price);
             return false;
         };
 
-        outStore = function (id, name, spec) {
-            inoutStore("出库", id, name, spec, "/inventoryDetail/addOut")
+        outStore = function (id, name, spec, price) {
+            inoutStore("出库", id, name, spec, "/inventoryDetail/addOut", price)
             return false;
         }
 
@@ -191,9 +221,11 @@
                     }
                 }
             });
+
+            return false;
         }
 
-        function inoutStore(title, id, name, spec, url) {
+        function inoutStore(title, id, name, spec, url, price) {
             $('#diaInOutstore').dialog('open').dialog({
                 title: title,
                 width: 288,
@@ -206,10 +238,17 @@
             $("#diain_spec").text(spec);
             $("#diain_qty").textbox("setValue", "");
 
+            if (price != undefined && price != "null") {
+                $("#diain_price").textbox("setValue", price);//默认值
+            }else{
+                $("#diain_price").textbox("setValue", "");
+            }
+
             $('#btnin_save').unbind('click').click(function () {
                 var model = {
                     inventoryId: id,
-                    qty: $('#diain_qty').textbox('getValue')
+                    qty: $('#diain_qty').textbox('getValue'),
+                    price: $('#diain_price').textbox('getValue')
                 }
 
                 $.ajax({
@@ -234,9 +273,25 @@
         };
 
         function refresh() {
+            var model = {
+                name: $('#search_name').textbox('getValue'),
+                spec: $('#search_spec').textbox('getValue'),
+                location: $('#search_location').textbox('getValue'),
+                isNeedAdd: $('#isNeedAdd').combobox('getValue')
+            }
+
+            if (model.isNeedAdd == "") {
+                model.isNeedAdd = 0;
+            }
+
             $('#dg').datagrid({
                 title: '列表',
                 url: '/inventory/getList',
+                // type: "POST",
+                // data: JSON.stringify(model),
+                // dataType: 'json',
+                // contentType: 'application/json;charset=utf-8',
+                queryParams: model,
                 rownumbers: true,
                 pageList: [10, 20, 30],//选择一页显示多少数据
                 pagination: true,
@@ -246,6 +301,7 @@
                     {field: 'qty', title: '数量', width: 100},
                     {field: 'location', title: '位置', width: 100},
                     {field: 'minQty', title: '最低库存数量', width: 100},
+                    {field: 'isNeed', title: '是否需要补货', width: 100, formatter: isNeedAdd},
                     {
                         field: 'operation', title: '操作', width: 200, formatter: operation
                     }

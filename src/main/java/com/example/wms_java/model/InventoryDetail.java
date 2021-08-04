@@ -1,11 +1,14 @@
 package com.example.wms_java.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
+
 import org.springframework.stereotype.Repository;
 
 /**
  * inventory_detail
+ *
  * @author
  */
 @Repository
@@ -16,12 +19,16 @@ public class InventoryDetail extends MyPage {
 
     private Integer inventoryId;
 
+    private String inventoryName;
+
     /**
      * 1：入库，2：出库
      */
     private Integer type;
 
     private Integer qty;
+
+    private BigDecimal price;
 
     private Date createTime;
 
@@ -49,6 +56,14 @@ public class InventoryDetail extends MyPage {
         this.inventoryId = inventoryId;
     }
 
+    public String getInventoryName() {
+        return inventoryName;
+    }
+
+    public void setInventoryName(String inventoryName) {
+        this.inventoryName = inventoryName;
+    }
+
     public Integer getType() {
         return type;
     }
@@ -63,6 +78,14 @@ public class InventoryDetail extends MyPage {
 
     public void setQty(Integer qty) {
         this.qty = qty;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Date getCreateTime() {

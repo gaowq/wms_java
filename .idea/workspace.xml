@@ -10,20 +10,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f340ef55-67c5-4710-a912-b5e5c349f497" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/wms_java_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/65c0fec4-9e6a-45a5-814d-80e7a6a5a5ae.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/65c0fec4-9e6a-45a5-814d-80e7a6a5a5ae.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9c4c1832-0d20-434d-9b04-b4eeb8c47703.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9c4c1832-0d20-434d-9b04-b4eeb8c47703.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/WmsJavaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/WmsJavaApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/mapper/InventoryDetailMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/mapper/InventoryDetailMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/model/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/model/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/model/InventoryDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/model/InventoryDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/IInventoryDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/IInventoryDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/impl/InventoryDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/impl/InventoryDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/impl/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/service/impl/InventoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/wms_java/util/CommonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/wms_java/util/CommonUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/InventoryDetailMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/InventoryDetailMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/InventoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/InventoryMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/inventory/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/inventory/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/inventory/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/InventoryDetailMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/InventoryDetailMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/InventoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/InventoryMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/inventory/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/inventory/detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/inventory/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/inventory/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.example.wms_java.WmsJavaApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.example.wms_java.WmsJavaApplicationTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.example.wms_java.WmsJavaApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.example.wms_java.WmsJavaApplicationTests.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/wms_java-1.0.0.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/wms_java-1.0.0.jar.original" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +163,7 @@
       <workItem from="1627634603262" duration="15985000" />
       <workItem from="1627895396730" duration="1370000" />
       <workItem from="1627917765002" duration="13618000" />
-      <workItem from="1627982025667" duration="15297000" />
+      <workItem from="1627982025667" duration="31271000" />
     </task>
     <servers />
   </component>
@@ -168,14 +179,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryController.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryDetailController.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryDetailController.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/wms_java/controller/InventoryController.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

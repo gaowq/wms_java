@@ -7,6 +7,8 @@ import com.example.wms_java.model.InventoryDetail;
 import com.example.wms_java.service.IInventoryDetailService;
 import com.example.wms_java.service.IInventoryService;
 import com.example.wms_java.util.CommonConstant;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,7 +67,18 @@ public class InventoryDetailService implements IInventoryDetailService {
 
     @Override
     public List<InventoryDetail> selectList(InventoryDetail inventoryDetail) {
-        return inventoryDetailMapper.selectList(inventoryDetail);
+
+        List<InventoryDetail> list = inventoryDetailMapper.selectList(inventoryDetail);
+
+        for (InventoryDetail item : list) {
+            Inventory inventory = inventoryMapper.selectByPrimaryKey(item.getInventoryId());
+
+            if (inventory != null) {
+                item.setInventoryName(inventory.getName());
+            }
+        }
+
+        return list;
     }
 
     @Override

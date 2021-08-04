@@ -32,9 +32,12 @@
     <select id="selectList" resultMap="BaseResultMap">
         <include refid="Base_Column_List"/>
         <where>
-            and isdel = 0
-            <if test='name != null'>and `name` = #{name}</if>
-            <if test='location != null'>and location = #{location}</if>
+            and isdel=0
+            <if test="isNeedAdd=='1'.toString()">and min_qty > qty</if>
+            <if test="isNeedAdd=='2'.toString()">and qty >= min_qty</if>
+            <if test="name != null and name != ''">and `name` like '%${name}%'</if>
+            <if test="spec != null and spec != ''">and `spec` like '%${spec}%'</if>
+            <if test="location != null and location != ''">and location like '%${location}%'</if>
         </where>
     </select>
 
@@ -44,8 +47,8 @@
     </select>
     <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         update inventory
-        set isdel      = 1,
-            update_time=current_date()
+        set isdel= 1,
+            update_time=current_time()
         where id = #{id,jdbcType=INTEGER}
     </update>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.wms_java.model.Inventory"

@@ -1,5 +1,6 @@
 package com.example.wms_java.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import org.springframework.stereotype.Repository;
 
@@ -44,6 +45,20 @@ public class Inventory extends MyPage {
     private Date updateTime;
 
     private Integer updateId;
+
+    private Integer isNeedAdd;
+
+    private BigDecimal lastInPrice;
+
+    private BigDecimal lastOutPrice;
+
+    public Integer getIsNeedAdd() {
+        return isNeedAdd;
+    }
+
+    public void setIsNeedAdd(Integer isNeedAdd) {
+        this.isNeedAdd = isNeedAdd;
+    }
 
     public Integer getId() {
         return id;
@@ -131,5 +146,21 @@ public class Inventory extends MyPage {
 
     public void setUpdateId(Integer updateId) {
         this.updateId = updateId;
+    }
+
+    public BigDecimal getLastInPrice() {
+        return lastInPrice;
+    }
+
+    public void setLastInPrice(BigDecimal lastInPrice) {
+        this.lastInPrice = lastInPrice;
+    }
+
+    public BigDecimal getLastOutPrice() {
+        return lastOutPrice;
+    }
+
+    public void setLastOutPrice(BigDecimal lastOutPrice) {
+        this.lastOutPrice = lastOutPrice;
     }
 }
