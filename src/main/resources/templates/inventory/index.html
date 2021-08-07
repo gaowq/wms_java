@@ -50,24 +50,24 @@
                 <input class="easyui-textbox" name="location" id="dia_location"/>
             </td>
         </tr>
-        <tr>
+        <tr id="diaqtytr">
             <td>数量</td>
             <td>
-                <input class="easyui-textbox" name="qty" id="dia_qty"/>
+                <input class="easyui-numberbox" name="qty" data-options="min:0,precision:0" id="dia_qty"/>
             </td>
         </tr>
 
         <tr>
             <td>最低库存数量</td>
             <td>
-                <input class="easyui-textbox" name="minqty" id="dia_minqty"/>
+                <input class="easyui-numberbox" name="minqty" data-options="min:0,precision:0" id="dia_minqty"/>
             </td>
         </tr>
 
 
         <tr>
             <td colspan="2" style="text-align: right;">
-                <a id="btn_save" style="margin-left: 20px;" href="#" class="easyui-linkbutton">添加</a>
+                <a id="btn_save" style="margin-left: 20px;" href="#" class="easyui-linkbutton">保存</a>
             </td>
         </tr>
     </table>
@@ -93,14 +93,14 @@
         <tr>
             <td>数量</td>
             <td>
-                <input class="easyui-textbox" name="qty" id="diain_qty"/>
+                <input class="easyui-numberbox" name="qty" data-options="min:1,precision:0" id="diain_qty"/>
             </td>
         </tr>
 
         <tr>
             <td>价格</td>
             <td>
-                <input class="easyui-textbox" name="price" id="diain_price"/>
+                <input class="easyui-numberbox" name="price" data-options="min:0,precision:2" id="diain_price"/>
             </td>
         </tr>
 
@@ -113,21 +113,9 @@
 
 </div>
 
-
 <script type="text/javascript" th:inline="none">
     $(function () {
-        $(document).ready(function () {
-            refresh();
-        });
-
-        function myShow(msg) {
-            $.messager.show({
-                title: '提示',
-                msg: msg,
-                timeout: 2000,
-                showType: 'slide'
-            });
-        }
+        refresh();
 
         $("#btn1").click(function () {
             refresh();
@@ -143,6 +131,7 @@
                 closed: false
             });
             //$("#dia_name").textbox("setValue", "默认");
+            $('#diaqtytr').show();
 
             $('#btn_save').click(function () {
                 var model = {
@@ -186,7 +175,7 @@
         function operation(value, row, index) {
             var Action = "<a href='javascript:void(0);' onclick='inStore(" + row.id + "," + "\"" + row.name + "\"" + "," + "\"" + row.spec + "\"" + "," + "\"" + row.lastInPrice + "\"" + ")'>入库</a>\
                                     | <a href='javascript:void(0);' onclick='outStore(" + row.id + "," + "\"" + row.name + "\"" + "," + "\"" + row.spec + "\"" + "," + "\"" + row.lastOutPrice + "\"" + ")'>出库</a>\
-                                    | <a href='javascript:void(0);' onclick='editRow(" + row.id + ")'>修改</a>\
+                                    | <a href='javascript:void(0);' onclick='editRow(" + row.id + "," + "\"" + row.name + "\"" + "," + "\"" + row.spec + "\"" + "," + "\"" + row.location + "\"" + "," + "\"" + row.minQty + "\"" + ")'>修改</a>\
                                     | <a href='javascript:void(0);' onclick='deleteRow(" + row.id + ")'>删除</a>";
             return Action;
         }
@@ -199,6 +188,57 @@
         outStore = function (id, name, spec, price) {
             inoutStore("出库", id, name, spec, "/inventoryDetail/addOut", price)
             return false;
+        }
+
+        editRow = function (id, name, spec, location, minQty) {
+            $('#diaEdit').dialog('open').dialog({
+                title: "编辑货物",
+                width: 288,
+                height: 250,
+                modal: true,
+                closed: false
+            });
+
+            if (location == 'null') {
+                location = "";
+            }
+
+            $('#dia_name').textbox('setValue', name);
+            $('#dia_spec').textbox('setValue', spec);
+            $('#dia_location').textbox('setValue', location);
+            $('#dia_minqty').textbox('setValue', minQty);
+
+            $('#diaqtytr').hide();
+
+            $('#btn_save').unbind('click').click(function () {
+                var model = {
+                    id: id,
+                    name: $('#dia_name').textbox('getValue'),
+                    spec: $('#dia_spec').textbox('getValue'),
+                    //qty: $('#dia_qty').textbox('getValue'),
+                    location: $('#dia_location').textbox('getValue'),
+                    minQty: $('#dia_minqty').textbox('getValue')
+                }
+
+                $.ajax({
+                    url: "/inventory/edit",
+                    // data: model,
+                    type: "POST",
+                    data: JSON.stringify(model),
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (data) {
+                        if (data.status > 0) {
+                            myShow("编辑成功");
+                            $("#diaEdit").window('close');
+                            refresh();
+                        } else {
+                            myShow("编辑失败");
+                        }
+                    }
+                });
+                return false;
+            });
         }
 
         deleteRow = function (id) {
@@ -240,7 +280,7 @@
 
             if (price != undefined && price != "null") {
                 $("#diain_price").textbox("setValue", price);//默认值
-            }else{
+            } else {
                 $("#diain_price").textbox("setValue", "");
             }
 

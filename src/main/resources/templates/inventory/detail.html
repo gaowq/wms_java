@@ -1,33 +1,22 @@
 <body>
 
-<!--<input type="button" id="btn0" value="添加分类"/>-->
-<!--<br/>-->
+<div style="margin:10px 10px 10px 10px;">
+    <a id="dailySale" style="margin-left: 20px;" href="#" class="easyui-linkbutton">今日销售数据</a>
+    <a id="expotInventoryDetail" style="margin-left: 20px;" href="#" class="easyui-linkbutton">导出</a>
+</div>
 
 <div id="inventoryDetail" style="margin:10px 10px 10px 10px;">
-    <!--    <a id="inBtn" style="margin-left: 20px;margin-bottom: 20px;" href="#" class="easyui-linkbutton">入库</a>-->
-    <!--    <a id="outBtn" style="margin-left: 20px;margin-bottom: 20px;" href="#" class="easyui-linkbutton">出库</a>-->
-    <!--    <br/>-->
-
-    <!--    <label>名称</label>-->
-    <!--    <input class="easyui-textbox" name="name"/>-->
-    <!--    <label style="margin-left: 20px;">规格</label>-->
-    <!--    <input class="easyui-textbox" type="text" name="spec"/>-->
-    <!--    <label style="margin-left: 20px;">位置</label>-->
-    <!--    <select id="cc" class="easyui-combobox" name="position" style="width:200px;">-->
-    <!--    </select>-->
+    <label>类型</label>
     <select id="type" class="easyui-combobox" style="width: 200px;" name="type">
         <option value="">全部</option>
         <option value="1">入库</option>
         <option value="2">出库</option>
     </select>
+    <label>日期</label>
+    <input id="dd" type="text" class="easyui-datebox">
     <a id="btnSearch" style="margin-left: 20px;" href="#" class="easyui-linkbutton">搜索</a>
-
-    <!--    <a id="btnAdd" style="margin-left: 20px;" href="#" class="easyui-linkbutton"-->
-    <!--       data-options="iconCls:'icon-add'"></a>-->
 </div>
 
-<!--<input type="button" id="btn2" value="进货"/>-->
-<!--<input type="button" id="btn3" value="出货"/>-->
 <div style="margin:10px 10px 10px 10px;">
     <table id="dg2"></table>
 </div>
@@ -38,34 +27,22 @@
     <input class="easyui-textbox" name="name" id="dia_name"/>
 </div>
 
-
 <script type="text/javascript" th:inline="none">
     $(function () {
-        $(document).ready(function () {
-            //$("#btn1").click();
-            refresh();
+        var curr_time = new Date();
+        //$('#dd').datebox('setValue', curr_time.Format("yyyy-MM-dd hh:mm:ss"));
+
+        $('#dd').datebox({
+            value: curr_time.Format("yyyy-MM-dd hh:mm:ss"),
+            onSelect: function (date) {
+                refresh();
+            }
         });
+        refresh();
 
         $('#inventoryDetail #btnSearch').click(function () {
             refresh();
         });
-
-        // $("#btn1").click(function () {
-        //     $('#dg').datagrid({
-        //         title: '列表',
-        //         url: '/inventory/getList',
-        //         rownumbers: true,
-        //         pageList: [10, 20, 30],//选择一页显示多少数据
-        //         pagination: true,
-        //         columns: [[
-        //             {field: 'name', title: '名称', width: 100},
-        //             {field: 'spec', title: '规格', width: 100},
-        //             {field: 'qty', title: '数量', width: 100},
-        //             {field: 'location', title: '位置', width: 100},
-        //             {field: 'min_qty', title: '最低库存数量', width: 100}
-        //         ]]
-        //     });
-        // });
 
         $("#btnAdd").click(function () {
             $('#diaEdit').dialog('open').dialog({
@@ -75,41 +52,8 @@
                 modal: true,
                 closed: false
             });
-            //$("#dia_name").textbox("setValue", "默认");
-            // var row = $('#dg').datagrid('getSelected');
-            // if (row) {
-            //     $('#diaEdit').dialog('open').dialog({
-            //         title: "编辑流程",
-            //         width: 350,
-            //         height: 250,
-            //         modal: true
-            //     });
-            //     $("#txtID").val(row.FlowID);
-            //     $("#txtName").val(row.Name);
-            //     $("#txtSort").val(row.Sort);
-            //     $("#txtState").val(row.IsUse);
-            //     $("#txtUrl").val(row.Url);
-            // } else {
-            //     $.messager.alert("提示", "请选中要编辑的行！");
-            // }
+
         });
-
-        Date.prototype.Format = function (fmt) { //author: meizz
-
-            var o = {
-                "M+": this.getMonth() + 1, //月份
-                "d+": this.getDate(), //日
-                "h+": this.getHours(), //小时
-                "m+": this.getMinutes(), //分
-                "s+": this.getSeconds(), //秒
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-                "S": this.getMilliseconds() //毫秒
-            };
-            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            for (var k in o)
-                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            return fmt;
-        }
 
         function typeConvert(value) {
             if (value == 1) {
@@ -119,20 +63,10 @@
             }
         }
 
-        function dateTimeFormatter(value) {
-            if (value == undefined || value == "") {
-                return "";
-            }
-
-            return new Date(value).Format("yyyy年MM月dd日 hh:mm:ss");
-        }
-
         function refresh() {
             var model = {
-                type: $('#inventoryDetail #type').combobox('getValue')
-                // name: $('#search_name').textbox('getValue'),
-                // spec: $('#search_spec').textbox('getValue'),
-                // location: $('#search_location').textbox('getValue')
+                type: $('#inventoryDetail #type').combobox('getValue'),
+                createDate: $('#inventoryDetail #dd').combobox('getValue')
             }
 
             $('#dg2').datagrid({
@@ -150,6 +84,7 @@
                     // {field: 'name', title: '名称', width: 100},
                     // {field: 'spec', title: '规格', width: 100},
                     {field: 'inventoryName', title: '名称', width: 100},
+                    {field: 'inventorySpec', title: '规格', width: 100},
                     {field: 'qty', title: '数量', width: 100},
                     {field: 'price', title: '价格', width: 100},
                     {field: 'type', title: '类型', width: 100, formatter: typeConvert},
@@ -161,6 +96,24 @@
             });
         }
 
+        $("#dailySale").click(function () {
+            var curr_time = new Date();
+            $('#dd').datebox('setValue', curr_time.Format("yyyy-MM-dd hh:mm:ss"));
+            $('#inventoryDetail #type').combobox('setValue', 2);
+            refresh();
+            return false;
+        });
+
+        $("#expotInventoryDetail").click(function () {
+            var model = {
+                type: $('#inventoryDetail #type').combobox('getValue'),
+                createDate: $('#inventoryDetail #dd').combobox('getValue')
+            }
+
+            window.open('/inventoryDetail/export?type=' + model.type + '&createDate=' + model.createDate);
+
+            return false;
+        });
     });
 </script>
 </body>

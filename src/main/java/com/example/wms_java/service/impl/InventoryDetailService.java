@@ -75,9 +75,9 @@ public class InventoryDetailService implements IInventoryDetailService {
 
             if (inventory != null) {
                 item.setInventoryName(inventory.getName());
+                item.setInventorySpec(inventory.getSpec());
             }
         }
-
         return list;
     }
 

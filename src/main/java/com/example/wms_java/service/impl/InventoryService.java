@@ -28,7 +28,7 @@ public class InventoryService implements IInventoryService {
 
     @Override
     public int updateInventory(Inventory inventory) {
-        return inventoryMapper.updateByPrimaryKey(inventory);
+        return inventoryMapper.updateInventory(inventory);
     }
 
     @Override

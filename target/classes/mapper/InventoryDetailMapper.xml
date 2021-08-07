@@ -32,6 +32,7 @@
             and isdel = 0
             <if test="inventoryId != null and inventoryId != ''">and inventory_id = #{inventoryId}</if>
             <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="createDate != null and createDate != ''">and date_format(create_time,'%Y-%m-%d') = #{createDate}</if>
         </where>
 
         order by id desc

@@ -127,4 +127,24 @@ public class InventoryDetail extends MyPage {
     public void setIsdel(Integer isdel) {
         this.isdel = isdel;
     }
+
+    private String inventorySpec;
+
+    private String createDate;
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getInventorySpec() {
+        return inventorySpec;
+    }
+
+    public void setInventorySpec(String inventorySpec) {
+        this.inventorySpec = inventorySpec;
+    }
 }

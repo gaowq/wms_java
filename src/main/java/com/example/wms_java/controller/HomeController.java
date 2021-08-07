@@ -38,6 +38,11 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/react")
+    public String react(HttpServletRequest request) {
+        return "react";
+    }
+
     @ResponseBody
     @PostMapping("/getTable2")
     public List<Inventory> getTable2(Inventory inventory) {

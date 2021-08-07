@@ -21,31 +21,10 @@
 <link rel="stylesheet" href="/jquery-easyui-1.8.8/themes/icon.css">
 <script src="/jquery-easyui-1.8.8/jquery.easyui.min.js"></script>
 <script src="/jquery-easyui-1.8.8/locale/easyui-lang-zh_CN.js"></script>
+<script  type="text/javascript"t src="myJs.js"></script>
 
 <script type="text/javascript" th:inline="none">
     $(function () {
-        // function myalert(){
-        //     $.messager.alert(' ','<font size=\"2\" color=\"#666666\"><strong>数据库暂无记录！</strong></font>','infoSunnyIcon',function(){
-        //         //alert('点击确定按钮才关闭');//
-        //     });
-        //
-        //     setTimeout(function(){
-        //         $(".messager-body").window('close');
-        //     },2000);
-        // }
-
-        var myShow = function (msg) {
-            $.messager.show({
-                title: '提示',
-                msg: msg,
-                timeout: 3000,
-                showType: 'slide'
-            });
-        }
-
-        //var basePath = $('#basePath').val();
-        //basePath +
-
         // 初始化
         //$('#menuAccordion').accordion();
         $('#menuAccordion').accordion({

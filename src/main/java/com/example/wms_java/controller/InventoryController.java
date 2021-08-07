@@ -25,7 +25,6 @@ public class InventoryController {
 
     @GetMapping("/index")
     public String index(HttpServletRequest request) {
-        //request.setAttribute("key", "游客");
         return "inventory/index";
     }
 
@@ -44,8 +43,14 @@ public class InventoryController {
     @ResponseBody
     @PostMapping("/add")
     public Map add(@RequestBody Inventory inventory) {
-        inventory.setCreateTime(new Date());
         int result = inventoryService.insertInventory(inventory);
+        return CommonUtil.apiResult(result, "");
+    }
+
+    @ResponseBody
+    @PostMapping("/edit")
+    public Map edit(@RequestBody Inventory inventory) {
+        int result = inventoryService.updateInventory(inventory);
         return CommonUtil.apiResult(result, "");
     }
 

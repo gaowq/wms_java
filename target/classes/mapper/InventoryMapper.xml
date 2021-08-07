@@ -166,12 +166,12 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.example.wms_java.model.Inventory">
+    <update id="updateInventory" parameterType="com.example.wms_java.model.Inventory">
         update inventory
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null">name = #{name},</if>
             <if test="spec != null">spec = #{spec},</if>
-            <if test="qty != null">qty = #{qty},</if>
+<!--            <if test="qty != null">qty = #{qty},</if>-->
             <if test="location != null">location = #{location},</if>
             <if test="minQty != null">min_qty = #{minQty},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>

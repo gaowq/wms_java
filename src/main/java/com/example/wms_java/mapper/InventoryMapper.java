@@ -20,7 +20,7 @@ public interface InventoryMapper {
 
     int updateByPrimaryKeySelective(Inventory record);
 
-    int updateByPrimaryKey(Inventory record);
+    int updateInventory(Inventory record);
 
     int addInventory(@Param("id") Integer inventoryId, @Param("quantity") int qty);
 
